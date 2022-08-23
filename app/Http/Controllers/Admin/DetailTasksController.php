@@ -103,6 +103,12 @@ class DetailTasksController extends Controller
         $dt->save();
         }
 
+
+
+
+
+
+
         if ($request->ajax()) {
             return ['redirect' => url('admin/detail-tasks'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }

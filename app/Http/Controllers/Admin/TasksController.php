@@ -20,6 +20,8 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Carbon\Carbon;
+
 
 class TasksController extends Controller
 {
@@ -38,11 +40,12 @@ class TasksController extends Controller
             $request,
 
             // set columns to query
-            ['id', 'name', 'date_begin', 'date_end', 'obs', 'state_id', 'advance'],
+            ['id', 'name', 'date_begin', 'date_end', 'obs', 'state_id', 'advance', 'place'],
 
             // set columns to searchIn
             ['id', 'name', 'obs']
         );
+
 
         if ($request->ajax()) {
             if ($request->has('bulk')) {
@@ -82,12 +85,21 @@ class TasksController extends Controller
      */
     public function store(StoreTask $request)
     {
+        //return $request;
         // Sanitize input
         $sanitized = $request->getSanitized();
         $sanitized ['state_id']=  $request->getStateId();
 
         // Store the Task
         $task = Task::create($sanitized);
+
+        $task1 = Task::find($task->id);
+        $inicio = Carbon::create($request->date_begin);
+        $fin = Carbon::create($request->date_end);
+        $diferencia = $fin->diffInDays($inicio);
+        $task1->place = $diferencia;
+        $task1->save();
+
 
         if ($request->ajax()) {
             return ['redirect' => url('admin/tasks'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];

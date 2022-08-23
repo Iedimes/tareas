@@ -31,7 +31,7 @@ class UpdateTask extends FormRequest
             'date_end' => ['sometimes', 'date'],
             'obs' => ['sometimes', 'string'],
             'state' => ['sometimes'],
-            'advance' => ['sometimes', 'integer'],
+            'advance' => ['sometimes'],
 
         ];
     }

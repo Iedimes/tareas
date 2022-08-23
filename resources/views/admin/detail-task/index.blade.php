@@ -58,6 +58,7 @@
                                         <th is='sortable' :column="'obs'">{{ trans('admin.detail-task.columns.obs') }}</th>
                                         <th is='sortable' :column="'user_id'">{{ trans('admin.detail-task.columns.user_id') }}</th>
                                         <th is='sortable' :column="'advance'">{{ trans('admin.detail-task.columns.advance') }}</th>
+                                        <th is='sortable' :column="'place'">{{ trans('admin.detail-task.columns.place') }}</th>
 
                                         <th></th>
                                     </tr>
@@ -84,11 +85,13 @@
                                     <td>@{{ item.id }}</td>
                                         <td>@{{ item.name }}</td>
                                         <td>@{{ item.task.name}}</td>
-                                        <td>@{{ item.state.name }}</td>                                        <td>@{{ item.date_begin | date }}</td>
+                                        <td>@{{ item.state.name }}</td>
+                                        <td>@{{ item.date_begin | date }}</td>
                                         <td>@{{ item.date_end | date }}</td>
                                         <td>@{{ item.obs }}</td>
                                         <td>@{{ item.user.full_name }}</td>
                                         <td>@{{ item.advance }}</td>
+                                        <td>@{{ item.place }}</td>
 
                                         <td>
                                             <div class="row no-gutters">

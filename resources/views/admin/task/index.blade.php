@@ -56,6 +56,7 @@
                                         <th is='sortable' :column="'obs'">{{ trans('admin.task.columns.obs') }}</th>
                                         <th is='sortable' :column="'state_id'">{{ trans('admin.task.columns.state_id') }}</th>
                                         <th is='sortable' :column="'advance'">{{ trans('admin.task.columns.advance') }}</th>
+                                        <th is='sortable' :column="'place'">{{ trans('admin.task.columns.place') }}</th>
 
                                         <th></th>
                                     </tr>
@@ -86,6 +87,7 @@
                                         <td>@{{ item.obs }}</td>
                                         <td>@{{ item.state.name }}</td>
                                         <td>@{{ item.advance }}</td>
+                                        <td>@{{ item.place }}</td>
 
                                         <td>
                                             <div class="row no-gutters">
