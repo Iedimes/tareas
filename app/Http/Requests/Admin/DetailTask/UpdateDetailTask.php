@@ -26,15 +26,15 @@ class UpdateDetailTask extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['sometimes', 'string'],
-            'task_id' => ['sometimes', 'integer'],
-            'state_id' => ['sometimes', 'integer'],
+            'name' => ['sometimes'],
+            'task' => ['sometimes'],
+            'state' => ['sometimes'],
             'date_begin' => ['sometimes', 'date'],
             'date_end' => ['sometimes', 'date'],
             'obs' => ['sometimes', 'string'],
-            'user_id' => ['sometimes', 'integer'],
-            'advance' => ['sometimes', 'integer'],
-            
+            'user' => ['sometimes'],
+            'advance' => ['', ''],
+
         ];
     }
 
@@ -51,5 +51,18 @@ class UpdateDetailTask extends FormRequest
         //Add your code for manipulation with request data here
 
         return $sanitized;
+    }
+
+    public function getStateId()
+    {
+        return $this->get('state')['id'];
+    }
+    public function getTaskId()
+    {
+        return $this->get('task')['id'];
+    }
+    public function getUserId()
+    {
+        return $this->get('user')['id'];
     }
 }

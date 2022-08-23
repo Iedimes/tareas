@@ -27,14 +27,14 @@ class StoreDetailTask extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'task_id' => ['required', 'integer'],
-            'state_id' => ['required', 'integer'],
+            'task' => ['required'],
+            'state' => ['required'],
             'date_begin' => ['required', 'date'],
             'date_end' => ['required', 'date'],
             'obs' => ['required', 'string'],
-            'user_id' => ['required', 'integer'],
-            'advance' => ['required', 'integer'],
-            
+            'user' => ['required'],
+            'advance' => ['', ''],
+
         ];
     }
 
@@ -50,5 +50,20 @@ class StoreDetailTask extends FormRequest
         //Add your code for manipulation with request data here
 
         return $sanitized;
+    }
+
+    public function getStateId()
+    {
+        return $this->get('state')['id'];
+    }
+
+    public function getTaskId()
+    {
+        return $this->get('task')['id'];
+    }
+
+    public function getUserId()
+    {
+        return $this->get('user')['id'];
     }
 }
