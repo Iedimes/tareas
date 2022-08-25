@@ -70,6 +70,10 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::post('/bulk-destroy',                                'TasksController@bulkDestroy')->name('bulk-destroy');
             Route::post('/{task}',                                      'TasksController@update')->name('update');
             Route::delete('/{task}',                                    'TasksController@destroy')->name('destroy');
+            Route::get('/{task}/show',                                  'TasksController@show')->name('show');
+            Route::get('/{task}/createdetail',                          'TasksController@createdetail')->name('createdetail');
+
+
         });
     });
 });
@@ -79,7 +83,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
         Route::prefix('detail-tasks')->name('detail-tasks/')->group(static function() {
             Route::get('/',                                             'DetailTasksController@index')->name('index');
-            Route::get('/create',                                       'DetailTasksController@create')->name('create');
+            Route::get('{detailTask}/create',                           'DetailTasksController@create')->name('create');
             Route::post('/',                                            'DetailTasksController@store')->name('store');
             Route::get('/{detailTask}/edit',                            'DetailTasksController@edit')->name('edit');
             Route::post('/bulk-destroy',                                'DetailTasksController@bulkDestroy')->name('bulk-destroy');

@@ -32,6 +32,7 @@ class UpdateTask extends FormRequest
             'obs' => ['sometimes', 'string'],
             'state' => ['sometimes'],
             'advance' => ['sometimes'],
+            'priority'=>['sometimes'],
 
         ];
     }

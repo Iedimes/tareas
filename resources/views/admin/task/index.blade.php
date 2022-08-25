@@ -57,6 +57,8 @@
                                         <th is='sortable' :column="'state_id'">{{ trans('admin.task.columns.state_id') }}</th>
                                         <th is='sortable' :column="'advance'">{{ trans('admin.task.columns.advance') }}</th>
                                         <th is='sortable' :column="'place'">{{ trans('admin.task.columns.place') }}</th>
+                                        <th is='sortable' :column="'priority'">{{ trans('admin.task.columns.priority') }}</th>
+
 
                                         <th></th>
                                     </tr>
@@ -88,9 +90,13 @@
                                         <td>@{{ item.state.name }}</td>
                                         <td>@{{ item.advance }}</td>
                                         <td>@{{ item.place }}</td>
+                                        <td>@{{ item.priority }}</td>
 
                                         <td>
                                             <div class="row no-gutters">
+                                                <div class="col-auto">
+                                                    <a class="btn btn-sm btn-spinner btn-info rounded-pill" :href="item.resource_url + '/show'" title="{{ trans('brackets/admin-ui::admin.btn.show') }}" role="button"><i class="fa fa-search"></i></a>
+                                                </div>
                                                 <div class="col-auto">
                                                     <a class="btn btn-sm btn-spinner btn-info" :href="item.resource_url + '/edit'" title="{{ trans('brackets/admin-ui::admin.btn.edit') }}" role="button"><i class="fa fa-edit"></i></a>
                                                 </div>

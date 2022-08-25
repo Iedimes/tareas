@@ -32,6 +32,7 @@ class StoreTask extends FormRequest
             'obs' => ['required', 'string'],
             'state' => ['required'],
             'advance' => ['', ''],
+            'priority'=>['required'],
 
         ];
     }

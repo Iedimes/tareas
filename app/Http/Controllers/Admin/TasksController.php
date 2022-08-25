@@ -9,6 +9,10 @@ use App\Http\Requests\Admin\Task\IndexTask;
 use App\Http\Requests\Admin\Task\StoreTask;
 use App\Http\Requests\Admin\Task\UpdateTask;
 use App\Models\Task;
+use App\Models\DetailTask;
+use App\Models\AdminUser;
+
+
 use App\Models\State;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
@@ -32,15 +36,17 @@ class TasksController extends Controller
      * @param IndexTask $request
      * @return array|Factory|View
      */
-    public function index(IndexTask $request)
+    public function index(Task $task,IndexTask $request)
     {
         // create and AdminListing instance for a specific model and
+        $id = $task->id;
+
         $data = AdminListing::create(Task::class)->processRequestAndGet(
             // pass the request with params
             $request,
 
             // set columns to query
-            ['id', 'name', 'date_begin', 'date_end', 'obs', 'state_id', 'advance', 'place'],
+            ['id', 'name', 'date_begin', 'date_end', 'obs', 'state_id', 'advance', 'place','priority'],
 
             // set columns to searchIn
             ['id', 'name', 'obs']
@@ -82,7 +88,23 @@ class TasksController extends Controller
      *
      * @param StoreTask $request
      * @return array|RedirectResponse|Redirector
+     *
+     *
      */
+
+
+    public function createdetail($id)
+    {
+
+        $this->authorize('admin.detail-task.create');
+
+        $state = State::all();
+      //  $category = category::all();
+        $user = AdminUser::all();
+        $task = Task::all();
+
+        return view('admin.detail-task.create', compact('id', 'state',  'user','task'));
+    }
     public function store(StoreTask $request)
     {
         //return $request;
@@ -102,10 +124,12 @@ class TasksController extends Controller
 
 
         if ($request->ajax()) {
-            return ['redirect' => url('admin/tasks'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+            return ['redirect' => url('/'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+
+
         }
 
-        return redirect('admin/tasks');
+        return redirect('/');
     }
 
     /**
@@ -115,11 +139,33 @@ class TasksController extends Controller
      * @throws AuthorizationException
      * @return void
      */
-    public function show(Task $task)
+    public function show(Task $task, IndexTask $request)
     {
-        $this->authorize('admin.task.show', $task);
-
+       // $this->authorize('admin.task.show', $task);
         // TODO your code goes here
+
+      $id = $task->id;
+
+      $data = AdminListing::create(DetailTask::class)->processRequestAndGet(
+        // pass the request with params
+        $request,
+
+        // set columns to query
+        ['id', 'name', 'task_id', 'state_id', 'date_begin', 'date_end', 'obs', 'user_id', 'advance'],
+
+        // set columns to searchIn
+        ['id', 'name', 'obs'],
+
+
+            function ($query) use ($id) {
+                                       $query
+                    ->where('detail_tasks.task_id', '=', $id);
+                //->orderBy('requirements.requirement_type_id');
+            }
+        );
+
+        return view('admin.task.show', compact('task', 'data') );
+
     }
 
     /**

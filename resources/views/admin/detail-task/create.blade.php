@@ -13,6 +13,8 @@
             :state="{{$state->toJson()}}"
             :task="{{$task->toJson()}}"
             :user="{{$user->toJson()}}"
+            :id={{$id}}
+
 
             v-cloak
             inline-template>

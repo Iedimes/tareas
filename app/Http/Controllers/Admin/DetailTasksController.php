@@ -81,9 +81,10 @@ class DetailTasksController extends Controller
      * @param StoreDetailTask $request
      * @return array|RedirectResponse|Redirector
      */
-    public function store(StoreDetailTask $request)
+    public function store(StoreDetailTask $request, Task $task)
     {
         // Sanitize input
+        return $request;
         $sanitized = $request->getSanitized();
         $sanitized ['state_id']=  $request->getStateId();
         $sanitized ['task_id']=  $request->getTaskId();
@@ -104,16 +105,11 @@ class DetailTasksController extends Controller
         }
 
 
-
-
-
-
-
         if ($request->ajax()) {
-            return ['redirect' => url('admin/detail-tasks'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+            return ['redirect' => url('admin/tasks/'.$request->getTaskId().'/show'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }
 
-        return redirect('admin/detail-tasks');
+        return redirect('admin/tasks');
     }
 
     /**

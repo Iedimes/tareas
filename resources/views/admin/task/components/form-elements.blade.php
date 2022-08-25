@@ -61,14 +61,27 @@
     </div>
 </div>
 
-
-
 <div class="form-group row align-items-center" :class="{'has-danger': errors.has('advance'), 'has-success': fields.advance && fields.advance.valid }">
-    <label for="advance" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.task.columns.advance') }}</label>
+    <label for="advance"  class="col-form-label text-md-right"   :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.task.columns.advance') }}</label>
         <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <input readonly type="text" v-model="form.advance"  @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('advance'), 'form-control-success': fields.advance && fields.advance.valid}" id="advance" name="advance" placeholder="{{ trans('admin.task.columns.advance') }}">
         <div v-if="errors.has('advance')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('advance') }}</div>
     </div>
 </div>
 
+
+<div class="form-group row align-items-center" :class="{'has-danger': errors.has('priority'), 'has-success': fields.priority && fields.priority.valid }">
+    <label for="priority"  class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.task.columns.priority') }}</label>
+        <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+        {{-- <input  type="select" v-model="form.priority"  @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('priority'), 'form-control-success': fields.priority && fields.priority.valid}" id="priority" name="priority" placeholder="{{ trans('admin.task.columns.priority') }}"> --}}
+        <select name="priority" id="priority" v-model="form.priority" class="form-control">
+            <option value="URGENTE">URGENTE</option>
+            <option value="MODERADO">MODERADO</option>
+            <option value="BAJO">BAJO</option>
+
+
+             </select>
+        <div v-if="errors.has('priority')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('priority') }}</div>
+    </div>
+</div>
 

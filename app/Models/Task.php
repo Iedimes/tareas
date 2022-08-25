@@ -13,6 +13,7 @@ class Task extends Model
         'obs',
         'state_id',
         'advance',
+        'priority',
 
     ];
 

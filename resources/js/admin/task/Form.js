@@ -12,6 +12,7 @@ Vue.component('task-form', {
                 obs:  '' ,
                 state:  '' ,
                 advance:  '' ,
+                priority: '',
 
             }
         }

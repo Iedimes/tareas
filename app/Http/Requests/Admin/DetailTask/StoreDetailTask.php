@@ -27,7 +27,7 @@ class StoreDetailTask extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'task' => ['required'],
+            'task' => [''],
             'state' => ['required'],
             'date_begin' => ['required', 'date'],
             'date_end' => ['required', 'date'],
