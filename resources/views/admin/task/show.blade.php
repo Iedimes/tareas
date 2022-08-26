@@ -33,7 +33,13 @@
         </div>
         <div class="row">
             <div class="form-group col-sm-2">
-                <p class="card-text"><strong>AVANCE:</strong> {{ $task->advance}}</p>
+                @if ($task->advance > '100')
+                    <p class="card-text"><strong>AVANCE:</strong> 100 %</p>
+                @else
+                <p class="card-text"><strong>AVANCE:</strong> {{ $task->advance}} %</p>
+                @endif
+
+
             </div>
             <div class="form-group col-sm-3">
                 <p class="card-text"><strong>PLAZO_DÍAS:</strong> {{$task->place}}</p>
