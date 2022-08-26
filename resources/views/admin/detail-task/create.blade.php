@@ -13,7 +13,8 @@
             :state="{{$state->toJson()}}"
             :task="{{$task->toJson()}}"
             :user="{{$user->toJson()}}"
-            :id={{$id}}
+            {{-- :id="{{$id}}" --}}
+
 
 
             v-cloak

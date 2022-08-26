@@ -28,7 +28,7 @@ class DetailTask extends Model
     ];
 
     protected $appends = ['resource_url'];
-    protected $with = ['state','task','user'];
+    protected $with = ['state','user', 'task'];
 
 
 

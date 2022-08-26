@@ -6,7 +6,7 @@
 
 <div class="card">
     <div class="card-header text-center">
-         DETALLE DE TAREAS
+         <center><h3>TAREA</h3></center>
          {{-- @if ($help->statuses->state_id != 4)
          <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0 rounded-pill" href="{{ url('admin/helps') }}" role="button"><i class="fa fa-undo"></i>&nbsp; {{ trans('admin.help.show') }}</a>
          {{-- <a href='admin/helps' class="btn btn-primary"> VOLVER <i class="fa" :class="submiting ? 'fa-spinner' : 'fa-undo'"></i></a> --}}<br>
@@ -28,7 +28,7 @@
                 <p class="card-text"><strong>FECHA FINAL:</strong> {{$task->date_end}}</p>
             </div>
             <div class="form-group col-sm-4">
-                <p class="card-text"><strong>OBSERVACION:</strong> {{$task->Obs}} </p>
+                <p class="card-text"><strong>OBSERVACION:</strong> {{$task->obs}} </p>
             </div>
         </div>
         <div class="row">
@@ -72,7 +72,7 @@
               <div class="card-body" v-cloak>
                   <div class="card-block">
                       <form @submit.prevent="">
-                          <div class="row justify-content-md-between">
+                          {{-- <div class="row justify-content-md-between">
                               <div class="col col-lg-7 col-xl-5 form-group">
                                   <div class="input-group">
                                       <input class="form-control" placeholder="{{ trans('brackets/admin-ui::admin.placeholder.search') }}" v-model="search" @keyup.enter="filter('search', $event.target.value)" />
@@ -89,7 +89,7 @@
                                       <option value="100">100</option>
                                   </select>
                               </div>
-                          </div>
+                          </div> --}}
                       </form>
 
                       <table class="table table-hover table-listing">

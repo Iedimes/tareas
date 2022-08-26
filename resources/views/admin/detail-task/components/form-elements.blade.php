@@ -7,11 +7,12 @@
 </div>
 
 <div class="form-group row align-items-center" :class="{'has-danger': errors.has('task_id'), 'has-success': fields.task_id && fields.task_id.valid }">
-    <label for="task_id" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.task.columns.state_id') }}</label>
+    <label for="task_id" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.task.columns.task_id') }}</label>
         <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
-            <multiselect
+        <multiselect
             v-model="form.task"
             :options="task"
+
             :multiple="false"
             track-by="id"
             label="name"
@@ -19,7 +20,17 @@
             tag-placeholder=""
             placeholder="{{ trans('admin.task.columns.task_id') }}">
         </multiselect>
+        {{-- <select name="task_id" id="task_id"  class="form-control">
+
+
+
+            <option value="{{ $id }}">{{ $task->name }}</option>
+
+
+
+         </select> --}}
         <div v-if="errors.has('task_id')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('task_id') }}</div>
+
     </div>
 </div>
 
@@ -39,6 +50,7 @@
         <div v-if="errors.has('state_id')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('state_id') }}</div>
     </div>
 </div>
+
 <div class="form-group row align-items-center" :class="{'has-danger': errors.has('date_begin'), 'has-success': fields.date_begin && fields.date_begin.valid }">
     <label for="date_begin" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.detail-task.columns.date_begin') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-sm-8'">

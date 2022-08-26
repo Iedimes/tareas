@@ -22,6 +22,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Carbon\Carbon;
 
 class DetailTasksController extends Controller
 {
@@ -40,7 +41,7 @@ class DetailTasksController extends Controller
             $request,
 
             // set columns to query
-            ['id', 'name', 'task_id', 'state_id', 'date_begin', 'date_end', 'obs', 'user_id', 'advance'],
+            ['id', 'name', 'task_id', 'state_id', 'date_begin', 'date_end', 'obs', 'user_id', 'advance', 'place'],
 
             // set columns to searchIn
             ['id', 'name', 'obs']
@@ -81,10 +82,10 @@ class DetailTasksController extends Controller
      * @param StoreDetailTask $request
      * @return array|RedirectResponse|Redirector
      */
-    public function store(StoreDetailTask $request, Task $task)
+    public function store(StoreDetailTask $request)
     {
+
         // Sanitize input
-        return $request;
         $sanitized = $request->getSanitized();
         $sanitized ['state_id']=  $request->getStateId();
         $sanitized ['task_id']=  $request->getTaskId();
@@ -93,6 +94,18 @@ class DetailTasksController extends Controller
 
         // Store the DetailTask
         $detailTask = DetailTask::create($sanitized);
+
+        //calcula cantidad de días del detalle de la tarea
+        $fecha = DetailTask::find($detailTask->id);
+        $inicio = Carbon::create($request->date_begin);
+        $fin = Carbon::create($request->date_end);
+        $diferencia = $fin->diffInDays($inicio);
+        $fecha->place = $diferencia;
+        $fecha->save();
+
+
+        //Calcula el porcentaje de acuerdo a la cantidad de tareas creadas
+
         $detalle = DetailTask::where('task_id','=',$request->getTaskId())->get();
         $contar=count($detalle);
         $x=100/$contar;
@@ -103,6 +116,9 @@ class DetailTasksController extends Controller
         $dt->advance = $resultado;
         $dt->save();
         }
+
+
+
 
 
         if ($request->ajax()) {
@@ -165,6 +181,15 @@ class DetailTasksController extends Controller
         $sanitized ['task_id']=  $request->getTaskId();
         $sanitized ['user_id']=  $request->getUserId();
 
+        //Actualizar fecha del detalle
+        //$detailTask->id;
+        $detailtask = DetailTask::find($detailTask->id);
+        $inicio = Carbon::create($request->date_begin);
+        $fin = Carbon::create($request->date_end);
+        $diferencia = $fin->diffInDays($inicio);
+        $detailTask->place = $diferencia;
+        $detailTask->update();
+
 
         // Update changed values DetailTask
         $detailTask->update($sanitized);
@@ -182,12 +207,12 @@ class DetailTasksController extends Controller
 
         if ($request->ajax()) {
             return [
-                'redirect' => url('admin/detail-tasks'),
+                'redirect' => url('admin/tasks/'.$request->getTaskId().'/show'),
                 'message' => trans('brackets/admin-ui::admin.operation.succeeded'),
             ];
         }
 
-        return redirect('admin/detail-tasks');
+        return redirect('admin/tasks/'.$request->getTaskId().'/show');
     }
 
     /**

@@ -11,8 +11,6 @@ use App\Http\Requests\Admin\Task\UpdateTask;
 use App\Models\Task;
 use App\Models\DetailTask;
 use App\Models\AdminUser;
-
-
 use App\Models\State;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
@@ -93,21 +91,23 @@ class TasksController extends Controller
      */
 
 
-    public function createdetail($id)
+    public function createdetail()
     {
 
         $this->authorize('admin.detail-task.create');
 
         $state = State::all();
-      //  $category = category::all();
         $user = AdminUser::all();
+        //$task = Task::find($id);
         $task = Task::all();
 
-        return view('admin.detail-task.create', compact('id', 'state',  'user','task'));
+        return view('admin.detail-task.create', compact('state', 'task', 'user'));
     }
+
+
     public function store(StoreTask $request)
     {
-        //return $request;
+        $request;
         // Sanitize input
         $sanitized = $request->getSanitized();
         $sanitized ['state_id']=  $request->getStateId();
@@ -124,12 +124,12 @@ class TasksController extends Controller
 
 
         if ($request->ajax()) {
-            return ['redirect' => url('/'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+            return ['redirect' => url('admin/tasks'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
 
 
         }
 
-        return redirect('/');
+        return redirect('admin/tasks');
     }
 
     /**
@@ -151,7 +151,7 @@ class TasksController extends Controller
         $request,
 
         // set columns to query
-        ['id', 'name', 'task_id', 'state_id', 'date_begin', 'date_end', 'obs', 'user_id', 'advance'],
+        ['id', 'name', 'task_id', 'state_id', 'date_begin', 'date_end', 'obs', 'user_id', 'advance', 'place'],
 
         // set columns to searchIn
         ['id', 'name', 'obs'],
@@ -199,6 +199,16 @@ class TasksController extends Controller
         // Sanitize input
         $sanitized = $request->getSanitized();
         $sanitized ['state_id']=  $request->getStateId();
+
+        //Actualizar calculo de fecha
+        $task1 = Task::find($task->id);
+        $inicio = Carbon::create($request->date_begin);
+        $fin = Carbon::create($request->date_end);
+        $diferencia = $fin->diffInDays($inicio);
+        $task1->place = $diferencia;
+        $task1->update();
+
+
 
         // Update changed values Task
         $task->update($sanitized);
