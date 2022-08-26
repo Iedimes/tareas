@@ -202,7 +202,13 @@ class DetailTasksController extends Controller
 
                 $task = Task::find($request->getTaskId());
                 $task->advance = $suma;
-                $task->save();
+                if ($suma>=100 ){
+
+                  $task->state_id=2;
+
+                }
+
+                $task->update();
                 }
 
         if ($request->ajax()) {
