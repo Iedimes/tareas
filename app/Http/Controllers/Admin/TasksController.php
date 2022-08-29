@@ -152,6 +152,8 @@ class TasksController extends Controller
       $dias=DetailTask::all()->where('task_id','=',$id);
       $plazo = $dias->sum('place');
 
+      $detalle=DetailTask::all()->where('task_id','=',$id);
+
 
       $data = AdminListing::create(DetailTask::class)->processRequestAndGet(
         // pass the request with params
@@ -171,7 +173,7 @@ class TasksController extends Controller
             }
         );
 
-        return view('admin.task.show', compact('task', 'data', 'plazo') );
+        return view('admin.task.show', compact('task', 'data', 'plazo', 'detalle') );
 
     }
 

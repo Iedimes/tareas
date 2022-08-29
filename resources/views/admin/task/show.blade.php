@@ -6,7 +6,7 @@
 
 <div class="card">
     <div class="card-header text-center">
-         <center><h3>TAREA</h3></center>
+        <center><h3>TAREA</h3></center>
          {{-- @if ($help->statuses->state_id != 4)
          <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0 rounded-pill" href="{{ url('admin/helps') }}" role="button"><i class="fa fa-undo"></i>&nbsp; {{ trans('admin.help.show') }}</a>
          {{-- <a href='admin/helps' class="btn btn-primary"> VOLVER <i class="fa" :class="submiting ? 'fa-spinner' : 'fa-undo'"></i></a> --}}<br>
@@ -19,7 +19,7 @@
 
         <div class="row">
             <div class="form-group col-sm-2">
-            <p class="card-text"><strong>NOMBRE:</strong>  {{ $task->name }}</p>
+            <p class="card-text"><strong>TAREA:</strong>  {{ $task->name }}</p>
             </div>
             <div class="form-group col-sm-3">
                 <p class="card-text"><strong>FECHA INICIO:</strong>  {{$task->date_begin}}</p>
@@ -51,6 +51,8 @@
 
             <div class="form-group col-sm-3">
                 <p class="card-text"><strong>PLAZO_RESTANTE:</strong> {{$task->place - $plazo }} </p>
+
+
             </div>
 
 
@@ -59,8 +61,6 @@
                 <td style="text-align:center;">
                         <span class="badge bg-warning">
                             <td ><strong>ESTADO:</strong><span style="text-align:center;"> {{$task->state->name }} </span></td>
-
-
                         </span>
                 </td>
             </div>
@@ -82,8 +82,15 @@
       <div class="col">
           <div class="card">
               <div class="card-header">
-                  <i class="fa fa-align-justify"></i> {{ trans('admin.detail-task.actions.index') }}
-                  <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" href="{{ url('admin/tasks/'.$task->id.'/createdetail') }}" role="button"><i class="fa fa-plus"></i>&nbsp; {{ trans('admin.detail-task.actions.create') }}</a>
+                <i class="fa fa-align-justify"></i> DETALLE TAREA
+                {{-- <center><h3>DETALLE TAREA</h3></center> --}}
+                    @if ($task->state_id==2)
+
+                    @else
+
+                    <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" href="{{ url('admin/tasks/'.$task->id.'/createdetail') }}" role="button"><i class="fa fa-plus"></i>&nbsp; {{ trans('admin.detail-task.actions.create') }}</a>
+                    @endif
+
               </div>
               <div class="card-body" v-cloak>
                   <div class="card-block">
@@ -111,16 +118,16 @@
                       <table class="table table-hover table-listing">
                           <thead>
                               <tr>
-                                  <th class="bulk-checkbox">
+                                  {{-- <th class="bulk-checkbox">
                                       <input class="form-check-input" id="enabled" type="checkbox" v-model="isClickedAll" v-validate="''" data-vv-name="enabled"  name="enabled_fake_element" @click="onBulkItemsClickedAllWithPagination()">
                                       <label class="form-check-label" for="enabled">
                                           #
                                       </label>
-                                  </th>
+                                  </th> --}}
 
-                                  <th is='sortable' :column="'id'">{{ trans('admin.detail-task.columns.id') }}</th>
+                                  {{-- <th is='sortable' :column="'id'">{{ trans('admin.detail-task.columns.id') }}</th> --}}
                                   <th is='sortable' :column="'name'">{{ trans('admin.detail-task.columns.name') }}</th>
-                                  <th is='sortable' :column="'task_id'">{{ trans('admin.detail-task.columns.task_id') }}</th>
+                                  {{-- <th is='sortable' :column="'task_id'">{{ trans('admin.detail-task.columns.task_id') }}</th> --}}
                                   <th is='sortable' :column="'state_id'">{{ trans('admin.detail-task.columns.state_id') }}</th>
                                   <th is='sortable' :column="'date_begin'">{{ trans('admin.detail-task.columns.date_begin') }}</th>
                                   <th is='sortable' :column="'date_end'">{{ trans('admin.detail-task.columns.date_end') }}</th>
@@ -145,31 +152,41 @@
                           </thead>
                           <tbody>
                               <tr v-for="(item, index) in collection" :key="item.id" :class="bulkItems[item.id] ? 'bg-bulk' : ''">
-                                  <td class="bulk-checkbox">
+                                  {{-- <td class="bulk-checkbox">
                                       <input class="form-check-input" :id="'enabled' + item.id" type="checkbox" v-model="bulkItems[item.id]" v-validate="''" :data-vv-name="'enabled' + item.id"  :name="'enabled' + item.id + '_fake_element'" @click="onBulkItemClicked(item.id)" :disabled="bulkCheckingAllLoader">
                                       <label class="form-check-label" :for="'enabled' + item.id">
                                       </label>
-                                  </td>
+                                  </td> --}}
 
-                              <td>@{{ item.id }}</td>
+                              {{-- <td>@{{ item.id }}</td> --}}
                                   <td>@{{ item.name }}</td>
-                                  <td>@{{ item.task.name}}</td>
+                                  {{-- <td>@{{ item.task.name}}</td> --}}
                                   <td>@{{ item.state.name }}</td>
                                   <td>@{{ item.date_begin | date }}</td>
                                   <td>@{{ item.date_end | date }}</td>
                                   <td>@{{ item.obs }}</td>
                                   <td>@{{ item.user.full_name }}</td>
-                                  <td>@{{ item.advance }}</td>
+                                  <td>@{{ item.advance }} %</td>
                                   <td>@{{ item.place }}</td>
 
                                   <td>
                                       <div class="row no-gutters">
-                                          <div class="col-auto">
+                                          <div class="col-auto" v-if="item.state.name=='FINALIZADO'">
+
+
+                                          </div>
+
+                                          <div class="col-auto" v-else>
                                               <a class="btn btn-sm btn-spinner btn-info" :href="item.resource_url + '/edit'" title="{{ trans('brackets/admin-ui::admin.btn.edit') }}" role="button"><i class="fa fa-edit"></i></a>
                                           </div>
-                                          <form class="col" @submit.prevent="deleteItem(item.resource_url)">
-                                              <button type="submit" class="btn btn-sm btn-danger" title="{{ trans('brackets/admin-ui::admin.btn.delete') }}"><i class="fa fa-trash-o"></i></button>
+
+                                          <form class="col" @submit.prevent="deleteItem(item.resource_url)" v-if="item.state.name=='FINALIZADO'">
+
                                           </form>
+
+                                          <form class="col" @submit.prevent="deleteItem(item.resource_url)" v-else>
+                                            <button type="submit" class="btn btn-sm btn-danger" title="{{ trans('brackets/admin-ui::admin.btn.delete') }}"><i class="fa fa-trash-o"></i></button>
+                                        </form>
                                       </div>
                                   </td>
                               </tr>
