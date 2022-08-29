@@ -42,8 +42,18 @@
 
             </div>
             <div class="form-group col-sm-3">
-                <p class="card-text"><strong>PLAZO_DÍAS:</strong> {{$task->place}}</p>
+                <p class="card-text"><strong>PLAZO_DÍAS:</strong> {{$task->place}} </p>
             </div>
+
+            <div class="form-group col-sm-3">
+                <p class="card-text"><strong>PLAZO_DETALLE:</strong> {{$plazo}} </p>
+            </div>
+
+            <div class="form-group col-sm-3">
+                <p class="card-text"><strong>PLAZO_RESTANTE:</strong> {{$task->place - $plazo }} </p>
+            </div>
+
+
             <div class="form-group col-sm-4">
 
                 <td style="text-align:center;">

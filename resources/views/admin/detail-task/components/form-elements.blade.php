@@ -41,6 +41,7 @@
             v-model="form.state"
             :options="state"
             :multiple="false"
+            :value="1"
             track-by="id"
             label="name"
             :taggable="true"

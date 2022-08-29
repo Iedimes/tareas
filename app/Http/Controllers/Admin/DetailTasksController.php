@@ -47,6 +47,8 @@ class DetailTasksController extends Controller
             ['id', 'name', 'obs']
         );
 
+
+
         if ($request->ajax()) {
             if ($request->has('bulk')) {
                 return [

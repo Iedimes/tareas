@@ -146,6 +146,13 @@ class TasksController extends Controller
 
       $id = $task->id;
 
+
+      //calculo que suma los días de totales por cada item del detalle
+
+      $dias=DetailTask::all()->where('task_id','=',$id);
+      $plazo = $dias->sum('place');
+
+
       $data = AdminListing::create(DetailTask::class)->processRequestAndGet(
         // pass the request with params
         $request,
@@ -164,7 +171,7 @@ class TasksController extends Controller
             }
         );
 
-        return view('admin.task.show', compact('task', 'data') );
+        return view('admin.task.show', compact('task', 'data', 'plazo') );
 
     }
 
