@@ -173,7 +173,7 @@ class TasksController extends Controller
             }
         );
 
-        return view('admin.task.show', compact('task', 'data', 'plazo', 'detalle') );
+        return view('admin.task.show', compact('task', 'data', 'plazo') );
 
     }
 
