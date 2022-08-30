@@ -47,11 +47,11 @@
             </div>
 
             <div class="form-group col-sm-3">
-                <p class="card-text"><strong>PLAZO_DETALLE:</strong> {{$plazo}} </p>
+                <p class="card-text"><strong>DÍAS_RESTANTES:</strong> {{ $dif }} </p>
             </div>
 
             <div class="form-group col-sm-3">
-                <p class="card-text"><strong>PLAZO_RESTANTE:</strong> {{$task->place - $plazo }} </p>
+                <p class="card-text"><strong>PLAZO_RESTANTE:</strong>  </p>
 
 
             </div>

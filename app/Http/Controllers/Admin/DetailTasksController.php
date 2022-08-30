@@ -94,16 +94,43 @@ class DetailTasksController extends Controller
         $sanitized ['user_id']=  $request->getUserId();
 
 
+
         // Store the DetailTask
         $detailTask = DetailTask::create($sanitized);
 
-        //calcula cantidad de días del detalle de la tarea
-        $fecha = DetailTask::find($detailTask->id);
+        //insertar fecha de inicio del primer detalle a la cabecera, y fecha fin de ultimo registro a la cabecera
+
+        $detailtask1 = DetailTask::where('task_id', '=', $request->getTaskId())
+                            ->select('date_begin')
+                            ->first();
+
+
+        $detailtask2 = DetailTask::where('task_id', '=', $request->getTaskId())
+                                        ->select('date_end')
+                                        ->latest('id')
+                                        ->first();
+
+        $cabecera = Task::find($request->getTaskId());
+        $cabecera->date_begin = $detailtask1->date_begin;
+        $cabecera->date_end = $detailtask2->date_end;
+        $cabecera->update();
+
+
+        $task1 = Task::find($request->getTaskId());
         $inicio = Carbon::create($request->date_begin);
         $fin = Carbon::create($request->date_end);
         $diferencia = $fin->diffInDays($inicio);
-        $fecha->place = $diferencia;
-        $fecha->save();
+        $task1->place = $diferencia;
+        $task1->save();
+
+
+        // //calcula cantidad de días del detalle de la tarea
+        // $fecha = DetailTask::find($detailTask->id);
+        // $inicio = Carbon::create($request->date_begin);
+        // $fin = Carbon::create($request->date_end);
+        // $diferencia = $fin->diffInDays($inicio);
+        // $fecha->place = $diferencia;
+        // $fecha->save();
 
 
         //Calcula el porcentaje de acuerdo a la cantidad de tareas creadas
@@ -118,9 +145,6 @@ class DetailTasksController extends Controller
         $dt->advance = $resultado;
         $dt->save();
         }
-
-
-
 
 
         if ($request->ajax()) {

@@ -149,10 +149,15 @@ class TasksController extends Controller
 
       //calculo que suma los días de totales por cada item del detalle
 
-      $dias=DetailTask::all()->where('task_id','=',$id);
-      $plazo = $dias->sum('place');
+    //   $dias=DetailTask::all()->where('task_id','=',$id);
+    //   $plazo = $dias->sum('place');
 
-      $detalle=DetailTask::all()->where('task_id','=',$id);
+    //   $detalle=DetailTask::all()->where('task_id','=',$id);
+
+    $resto=Task::find($id);
+    $fecha_fin = $resto->date_end;
+    $fecha_actual = Carbon::now();
+    $dif = $fecha_fin->diffInDays($fecha_actual);
 
 
       $data = AdminListing::create(DetailTask::class)->processRequestAndGet(
@@ -173,7 +178,7 @@ class TasksController extends Controller
             }
         );
 
-        return view('admin.task.show', compact('task', 'data', 'plazo') );
+        return view('admin.task.show', compact('task', 'data', 'dif') );
 
     }
 
