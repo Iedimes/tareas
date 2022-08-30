@@ -27,8 +27,8 @@ class UpdateTask extends FormRequest
     {
         return [
             'name' => ['sometimes', 'string'],
-            'date_begin' => ['sometimes', 'date'],
-            'date_end' => ['sometimes', 'date'],
+            'date_begin' => ['sometimes'],
+            'date_end' => ['sometimes'],
             'obs' => ['sometimes', 'string'],
             'state' => ['sometimes'],
             'advance' => ['sometimes'],

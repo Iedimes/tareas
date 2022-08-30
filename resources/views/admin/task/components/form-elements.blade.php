@@ -6,27 +6,7 @@
     </div>
 </div>
 
-<div class="form-group row align-items-center" :class="{'has-danger': errors.has('date_begin'), 'has-success': fields.date_begin && fields.date_begin.valid }">
-    <label for="date_begin" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.task.columns.date_begin') }}</label>
-    <div :class="isFormLocalized ? 'col-md-4' : 'col-sm-8'">
-        <div class="input-group input-group--custom">
-            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-            <datetime v-model="form.date_begin" :config="datePickerConfig"  class="flatpickr" :class="{'form-control-danger': errors.has('date_begin'), 'form-control-success': fields.date_begin && fields.date_begin.valid}" id="date_begin" name="date_begin" placeholder="{{ trans('brackets/admin-ui::admin.forms.select_a_date') }}"></datetime>
-        </div>
-        <div v-if="errors.has('date_begin')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('date_begin') }}</div>
-    </div>
-</div>
 
-<div class="form-group row align-items-center" :class="{'has-danger': errors.has('date_end'), 'has-success': fields.date_end && fields.date_end.valid }">
-    <label for="date_end" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.task.columns.date_end') }}</label>
-    <div :class="isFormLocalized ? 'col-md-4' : 'col-sm-8'">
-        <div class="input-group input-group--custom">
-            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-            <datetime v-model="form.date_end" :config="datePickerConfig"  class="flatpickr" :class="{'form-control-danger': errors.has('date_end'), 'form-control-success': fields.date_end && fields.date_end.valid}" id="date_end" name="date_end" placeholder="{{ trans('brackets/admin-ui::admin.forms.select_a_date') }}"></datetime>
-        </div>
-        <div v-if="errors.has('date_end')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('date_end') }}</div>
-    </div>
-</div>
 
 <div class="form-group row align-items-center" :class="{'has-danger': errors.has('obs'), 'has-success': fields.obs && fields.obs.valid }">
     <label for="obs" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.task.columns.obs') }}</label>

@@ -27,8 +27,7 @@ class StoreTask extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'date_begin' => ['required', 'date'],
-            'date_end' => ['required', 'date'],
+
             'obs' => ['required', 'string'],
             'state' => ['required'],
             'advance' => ['', ''],
