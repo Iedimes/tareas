@@ -5,8 +5,8 @@
 @section('body')
 
 <div class="card">
-    <div class="card-header text-center">
-        <center><h3>TAREA</h3></center>
+    <div class="card-header">
+        <i class="fa fa-align-justify"></i> TAREA
          {{-- @if ($help->statuses->state_id != 4)
          <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0 rounded-pill" href="{{ url('admin/helps') }}" role="button"><i class="fa fa-undo"></i>&nbsp; {{ trans('admin.help.show') }}</a>
          {{-- <a href='admin/helps' class="btn btn-primary"> VOLVER <i class="fa" :class="submiting ? 'fa-spinner' : 'fa-undo'"></i></a> --}}<br>
@@ -22,10 +22,11 @@
             <p class="card-text"><strong>TAREA:</strong>  {{ $task->name }}</p>
             </div>
             <div class="form-group col-sm-3">
-                <p class="card-text"><strong>FECHA INICIO:</strong>  {{$task->date_begin}}</p>
+                <p class="card-text"><strong>FECHA INICIO:</strong> {{date("d/m/Y", strtotime($task->date_begin))}} </p>
+
             </div>
             <div class="form-group col-sm-3">
-                <p class="card-text"><strong>FECHA FINAL:</strong> {{$task->date_end}}</p>
+                <p class="card-text"><strong>FECHA FINAL:</strong> {{date("d/m/Y", strtotime($task->date_end))}}</p>
             </div>
             <div class="form-group col-sm-4">
                 <p class="card-text"><strong>OBSERVACION:</strong> {{$task->obs}} </p>
