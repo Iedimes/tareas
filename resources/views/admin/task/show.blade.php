@@ -51,19 +51,18 @@
             </div>
 
             <div class="form-group col-sm-3">
-                <p class="card-text"><strong>PLAZO_RESTANTE:</strong>  </p>
-
-
+                <p class="card-text"><strong>PRIORIDAD:</strong> {{ $task->priority }} </p>
             </div>
 
 
-            <div class="form-group col-sm-4">
+        </div>
 
-                <td style="text-align:center;">
-                        <span class="badge bg-warning">
-                            <td ><strong>ESTADO:</strong><span style="text-align:center;"> {{$task->state->name }} </span></td>
-                        </span>
-                </td>
+        <div class="row">
+
+            <div class="form-group col-sm-3">
+                <span class="badge bg-warning">
+                    <p class="card-text"><strong>ESTADO:</strong><span style="text-align:center;"> {{$task->state->name }} </span></p>
+                </span>
             </div>
 
         </div>
