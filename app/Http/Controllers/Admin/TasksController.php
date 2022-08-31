@@ -9,6 +9,7 @@ use App\Http\Requests\Admin\Task\IndexTask;
 use App\Http\Requests\Admin\Task\StoreTask;
 use App\Http\Requests\Admin\Task\UpdateTask;
 use App\Models\Task;
+
 use App\Models\DetailTask;
 use App\Models\AdminUser;
 use App\Models\State;
@@ -111,6 +112,9 @@ class TasksController extends Controller
         // Sanitize input
         $sanitized = $request->getSanitized();
         $sanitized ['state_id']=  '1';//$request->getStateId()'';
+
+        $sanitized ['date_begin']=Carbon::now();
+        $sanitized ['date_end']=Carbon::now();
 
         // Store the Task
         $task = Task::create($sanitized);
