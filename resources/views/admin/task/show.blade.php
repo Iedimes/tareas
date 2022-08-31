@@ -51,7 +51,25 @@
             </div>
 
             <div class="form-group col-sm-3">
-                <p class="card-text"><strong>PRIORIDAD:</strong> {{ $task->priority }} </p>
+                @if ($task->priority == 'BAJO')
+                    <span class="badge bg-primary">
+                        <p class="card-text"><strong>PRIORIDAD:</strong> {{ $task->priority }} </p>
+                    </span>
+                @endif
+
+                @if ($task->priority == 'MODERADO')
+                    <span class="badge bg-warning">
+                        <p class="card-text"><strong>PRIORIDAD:</strong> {{ $task->priority }} </p>
+                    </span>
+                @endif
+
+                @if ($task->priority == 'URGENTE')
+                    <span class="badge bg-danger">
+                        <p class="card-text"><strong>PRIORIDAD:</strong> {{ $task->priority }} </p>
+                    </span>
+                @endif
+
+
             </div>
 
 
@@ -60,7 +78,7 @@
         <div class="row">
 
             <div class="form-group col-sm-3">
-                <span class="badge bg-warning">
+                <span class="badge bg-success">
                     <p class="card-text"><strong>ESTADO:</strong><span style="text-align:center;"> {{$task->state->name }} </span></p>
                 </span>
             </div>
@@ -133,8 +151,8 @@
                                   <th is='sortable' :column="'date_end'">{{ trans('admin.detail-task.columns.date_end') }}</th>
                                   <th is='sortable' :column="'obs'">{{ trans('admin.detail-task.columns.obs') }}</th>
                                   <th is='sortable' :column="'user_id'">{{ trans('admin.detail-task.columns.user_id') }}</th>
-                                  <th is='sortable' :column="'advance'">{{ trans('admin.detail-task.columns.advance') }}</th>
-                                  <th is='sortable' :column="'place'">{{ trans('admin.detail-task.columns.place') }}</th>
+                                  {{-- <th is='sortable' :column="'advance'">{{ trans('admin.detail-task.columns.advance') }}</th>
+                                  <th is='sortable' :column="'place'">{{ trans('admin.detail-task.columns.place') }}</th> --}}
 
                                   <th></th>
                               </tr>
@@ -166,8 +184,8 @@
                                   <td>@{{ item.date_end | date }}</td>
                                   <td>@{{ item.obs }}</td>
                                   <td>@{{ item.user.full_name }}</td>
-                                  <td>@{{ item.advance }} %</td>
-                                  <td>@{{ item.place }}</td>
+                                  {{-- <td>@{{ item.advance }} %</td>
+                                  <td>@{{ item.place }}</td> --}}
 
                                   <td>
                                       <div class="row no-gutters">

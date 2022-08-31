@@ -51,8 +51,8 @@
 
                                         <th is='sortable' :column="'id'">{{ trans('admin.task.columns.id') }}</th>
                                         <th is='sortable' :column="'name'">{{ trans('admin.task.columns.name') }}</th>
-                                        <th is='sortable' :column="'date_begin'">{{ trans('admin.task.columns.date_begin') }}</th>
-                                        <th is='sortable' :column="'date_end'">{{ trans('admin.task.columns.date_end') }}</th>
+                                        {{-- <th is='sortable' :column="'date_begin'">{{ trans('admin.task.columns.date_begin') }}</th>
+                                        <th is='sortable' :column="'date_end'">{{ trans('admin.task.columns.date_end') }}</th> --}}
                                         <th is='sortable' :column="'obs'">{{ trans('admin.task.columns.obs') }}</th>
                                         <th is='sortable' :column="'state_id'">{{ trans('admin.task.columns.state_id') }}</th>
                                         <th is='sortable' :column="'advance'">{{ trans('admin.task.columns.advance') }}</th>
@@ -84,8 +84,8 @@
 
                                     <td>@{{ item.id }}</td>
                                         <td>@{{ item.name }}</td>
-                                        <td>@{{ item.date_begin | date }}</td>
-                                        <td>@{{ item.date_end | date }}</td>
+                                        {{-- <td>@{{ item.date_begin | date }}</td>
+                                        <td>@{{ item.date_end | date }}</td> --}}
                                         <td>@{{ item.obs }}</td>
                                         <td>@{{ item.state.name }}</td>
                                         <td>@{{ item.advance }}</td>
@@ -97,10 +97,11 @@
                                                 <div class="col-auto">
                                                     <a class="btn btn-sm btn-spinner btn-info rounded-pill" :href="item.resource_url + '/show'" title="{{ trans('brackets/admin-ui::admin.btn.show') }}" role="button"><i class="fa fa-search"></i></a>
                                                 </div>
-                                                <div class="col-auto">
+                                                <div class="col-auto"  v-if="item.state.name != 'FINALIZADO'">
                                                     <a class="btn btn-sm btn-spinner btn-info" :href="item.resource_url + '/edit'" title="{{ trans('brackets/admin-ui::admin.btn.edit') }}" role="button"><i class="fa fa-edit"></i></a>
                                                 </div>
-                                                <form class="col" @submit.prevent="deleteItem(item.resource_url)">
+
+                                                <form class="col" @submit.prevent="deleteItem(item.resource_url)" v-if="item.state.name != 'FINALIZADO'">
                                                     <button type="submit" class="btn btn-sm btn-danger" title="{{ trans('brackets/admin-ui::admin.btn.delete') }}"><i class="fa fa-trash-o"></i></button>
                                                 </form>
                                             </div>
