@@ -110,7 +110,7 @@ class TasksController extends Controller
         $request;
         // Sanitize input
         $sanitized = $request->getSanitized();
-        $sanitized ['state_id']=  $request->getStateId();
+        $sanitized ['state_id']=  '1';//$request->getStateId()'';
 
         // Store the Task
         $task = Task::create($sanitized);
