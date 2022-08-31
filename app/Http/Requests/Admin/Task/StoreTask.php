@@ -29,7 +29,7 @@ class StoreTask extends FormRequest
             'name' => ['required', 'string'],
 
             'obs' => ['required', 'string'],
-            'state' => ['required'],
+            'state' => [''],
             'advance' => ['', ''],
             'priority'=>['required'],
 
