@@ -89,7 +89,8 @@ class DetailTasksController extends Controller
 
         // Sanitize input
         $sanitized = $request->getSanitized();
-        $sanitized ['state_id']=  $request->getStateId();
+        $sanitized ['state_id']=  '1';
+        // $sanitized ['state_id']=  $request->getStateId();
         $sanitized ['task_id']=  $request->getTaskId();
         $sanitized ['user_id']=  $request->getUserId();
 

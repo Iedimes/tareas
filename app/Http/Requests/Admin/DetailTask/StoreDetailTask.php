@@ -28,12 +28,12 @@ class StoreDetailTask extends FormRequest
         return [
             'name' => ['required', 'string'],
             'task' => [''],
-            'state' => ['required'],
+            // 'state' => ['required'],
             'date_begin' => ['required', 'date'],
             'date_end' => ['required', 'date'],
             'obs' => ['required', 'string'],
             'user' => ['required'],
-            'advance' => ['', ''],
+            // 'advance' => ['', ''],
 
         ];
     }

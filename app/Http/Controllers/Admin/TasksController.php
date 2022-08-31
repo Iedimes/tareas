@@ -144,15 +144,8 @@ class TasksController extends Controller
        // $this->authorize('admin.task.show', $task);
         // TODO your code goes here
 
-      $id = $task->id;
+    $id = $task->id;
 
-
-      //calculo que suma los días de totales por cada item del detalle
-
-    //   $dias=DetailTask::all()->where('task_id','=',$id);
-    //   $plazo = $dias->sum('place');
-
-    //   $detalle=DetailTask::all()->where('task_id','=',$id);
 
     $resto=Task::find($id);
     $fecha_fin = $resto->date_end;
@@ -174,7 +167,7 @@ class TasksController extends Controller
             function ($query) use ($id) {
                                        $query
                     ->where('detail_tasks.task_id', '=', $id);
-                //->orderBy('requirements.requirement_type_id');
+
             }
         );
 
