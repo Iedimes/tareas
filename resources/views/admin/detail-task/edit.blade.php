@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="card-body">
-                        @include('admin.detail-task.components.form-elementsA')
+                        @include('admin.detail-task.components.form-elements')
                     </div>
 
 
