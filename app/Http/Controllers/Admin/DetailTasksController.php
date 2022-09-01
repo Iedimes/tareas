@@ -87,37 +87,38 @@ class DetailTasksController extends Controller
     public function store(StoreDetailTask $request)
     {
 
+        //return $request;
         // Sanitize input
         $sanitized = $request->getSanitized();
         $sanitized ['state_id']=  '1';
         // $sanitized ['state_id']=  $request->getStateId();
-        $sanitized ['task_id']=  $request->getTaskId();
+        //$sanitized ['task_id']=  $request->getTaskId();
         $sanitized ['user_id']=  $request->getUserId();
 
-
+        //return $sanitized;
 
         // Store the DetailTask
         $detailTask = DetailTask::create($sanitized);
 
         //insertar fecha de inicio del primer detalle a la cabecera, y fecha fin de ultimo registro a la cabecera
 
-        $detailtask1 = DetailTask::where('task_id', '=', $request->getTaskId())
+        $detailtask1 = DetailTask::where('task_id', '=', $request ['task_id'])
                             ->select('date_begin')
                             ->first();
 
 
-        $detailtask2 = DetailTask::where('task_id', '=', $request->getTaskId())
+        $detailtask2 = DetailTask::where('task_id', '=', $request['task_id'])
                                         ->select('date_end')
                                         ->latest('id')
                                         ->first();
 
-        $cabecera = Task::find($request->getTaskId());
+        $cabecera = Task::find($request ['task_id']);
         $cabecera->date_begin = $detailtask1->date_begin;
         $cabecera->date_end = $detailtask2->date_end;
         $cabecera->update();
 
 
-        $task1 = Task::find($request->getTaskId());
+        $task1 = Task::find($request ['task_id']);
         $inicio = Carbon::create($request->date_begin);
         $fin = Carbon::create($request->date_end);
         $diferencia = $fin->diffInDays($inicio);
@@ -136,12 +137,12 @@ class DetailTasksController extends Controller
 
         //Calcula el porcentaje de acuerdo a la cantidad de tareas creadas
 
-        $detalle = DetailTask::where('task_id','=',$request->getTaskId())->get();
+        $detalle = DetailTask::where('task_id','=',$request ['task_id'])->get();
         $contar=count($detalle);
         $x=100/$contar;
         $resultado=ceil($x);
 
-        $detailTask= DetailTask::where('task_id','=',$request->getTaskId())->get();
+        $detailTask= DetailTask::where('task_id','=',$request ['task_id'])->get();
         foreach ($detailTask as $dt){
         $dt->advance = $resultado;
         $dt->save();
@@ -149,7 +150,7 @@ class DetailTasksController extends Controller
 
 
         if ($request->ajax()) {
-            return ['redirect' => url('admin/tasks/'.$request->getTaskId().'/show'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+            return ['redirect' => url('admin/tasks/'.$request ['task_id'].'/show'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }
 
         return redirect('admin/tasks');

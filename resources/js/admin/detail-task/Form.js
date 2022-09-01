@@ -8,7 +8,7 @@ Vue.component('detail-task-form', {
         return {
             form: {
                 name:  '' ,
-                task:   '',
+                task_id:   this.task,
                 state:  '' ,
                 date_begin:  '' ,
                 date_end:  '' ,

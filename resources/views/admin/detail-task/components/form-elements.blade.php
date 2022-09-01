@@ -6,32 +6,6 @@
     </div>
 </div>
 
-<div class="form-group row align-items-center" :class="{'has-danger': errors.has('task_id'), 'has-success': fields.task_id && fields.task_id.valid }">
-    <label for="task_id" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.task.columns.task_id') }}</label>
-        <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
-        <multiselect
-            v-model="form.task"
-            :options="task"
-            :multiple="false"
-            track-by="id"
-            label="name"
-            :taggable="true"
-            tag-placeholder=""
-            placeholder="{{ trans('admin.task.columns.task_id') }}">
-        </multiselect>
-        {{-- <select name="task_id" id="task_id"  class="form-control">
-
-
-
-            <option value="{{ $id }}">{{ $task->name }}</option>
-
-
-
-         </select> --}}
-        <div v-if="errors.has('task_id')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('task_id') }}</div>
-
-    </div>
-</div>
 
 {{-- <div class="form-group row align-items-center" :class="{'has-danger': errors.has('state_id'), 'has-success': fields.state_id && fields.state_id.valid }">
     <label for="state_id" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.task.columns.state_id') }}</label>

@@ -92,7 +92,7 @@ class TasksController extends Controller
      */
 
 
-    public function createdetail()
+    public function createdetail(Task $task)
     {
 
         $this->authorize('admin.detail-task.create');
@@ -100,7 +100,8 @@ class TasksController extends Controller
         $state = State::all();
         $user = AdminUser::all();
         //$task = Task::find($id);
-        $task = Task::all();
+        //$task = Task::all();
+        //return $task;
 
         return view('admin.detail-task.create', compact('state', 'task', 'user'));
     }

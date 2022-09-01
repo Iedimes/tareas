@@ -11,7 +11,7 @@
         <detail-task-form
             :action="'{{ url('admin/detail-tasks') }}'"
             :state="{{$state->toJson()}}"
-            :task="{{$task->toJson()}}"
+            :task="{{$task->id }}"
             :user="{{$user->toJson()}}"
             {{-- :id="{{$id}}" --}}
 
