@@ -14,6 +14,8 @@ Vue.component('task-form', {
                 advance:  '' ,
                 priority: '',
 
+
+
             }
         }
     }

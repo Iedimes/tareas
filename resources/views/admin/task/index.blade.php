@@ -89,6 +89,30 @@
                                         <td>@{{ item.obs }}</td>
                                         <td>@{{ item.state.name }}</td>
                                         <td>@{{ item.advance }}</td>
+                                        <td>
+                                            {{-- <div class="progress progress-thin" v-if= "item.advance<25">
+                                                <div class="progress-bar bg-danger" role="progressbar"  v-bind:style="{width:item.advance + '%'}"  aria-valuenow="" aria-valuemin="0" aria-valuemax="100"  ></div>
+                                                 </div>
+
+                                                 <div class="progress progress-thin" v-if= "item.advance>=50 && item.advance<75">
+                                                    <div class="progress-bar bg-warning" role="progressbar"  v-bind:style="{width:item.advance + '%'}"  aria-valuenow="" aria-valuemin="0" aria-valuemax="100"  ></div>
+                                                     </div>
+
+                                                     <div class="progress progress-thin" v-if= "item.advance>=75 && item.advance<100">
+                                                        <div class="progress-bar bg-primary" role="progressbar"  v-bind:style="{width:item.advance + '%'}"  aria-valuenow="" aria-valuemin="0" aria-valuemax="100"  ></div>
+                                                         </div>
+
+                                                         <div class="progress progress-thin" v-if= "item.advance==100">
+                                                            <div class="progress-bar bg-success" role="progressbar"  v-bind:style="{width:item.advance + '%'}"  aria-valuenow="" aria-valuemin="0" aria-valuemax="100"  ></div>
+                                                             </div> --}}
+
+                                                             <div class="progress progress-thin" >
+                                                                <div class="progress-bar bg-primary" role="progressbar"  v-bind:style="{width:item.advance + '%'}"  aria-valuenow="" aria-valuemin="0" aria-valuemax="100"  ></div>
+                                                                 </div>
+
+
+
+                                        </td>
                                         <td>@{{ item.place }}</td>
                                         <td>@{{ item.priority }}</td>
 

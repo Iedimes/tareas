@@ -38,6 +38,10 @@
                     <p class="card-text"><strong>AVANCE:</strong> 100 %</p>
                 @else
                 <p class="card-text"><strong>AVANCE:</strong> {{ $task->advance}} %</p>
+
+                {{-- <div class="progress progress-thin">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: {{ $task->advance}}%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
+                     </div> --}}
                 @endif
 
 
