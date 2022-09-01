@@ -112,6 +112,8 @@
 
 
 
+
+
                                         </td>
                                         <td>@{{ item.place }}</td>
                                         <td>@{{ item.priority }}</td>
