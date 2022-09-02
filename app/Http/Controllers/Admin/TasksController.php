@@ -45,7 +45,7 @@ class TasksController extends Controller
             $request,
 
             // set columns to query
-            ['id', 'name', 'date_begin', 'date_end', 'obs', 'state_id', 'advance', 'place','priority'],
+            ['id', 'name', 'date_begin', 'date_end', 'obs', 'state_id', 'advance', 'place','priority','user_id'],
 
             // set columns to searchIn
             ['id', 'name', 'obs']
@@ -75,9 +75,11 @@ class TasksController extends Controller
         $this->authorize('admin.task.create');
 
         $state = State::all();
+        $user = AdminUser::all();
 
 
-        return view('admin.task.create', compact('state'));
+
+        return view('admin.task.create', compact('state','user'));
 
 
     }
@@ -116,6 +118,8 @@ class TasksController extends Controller
 
         $sanitized ['date_begin']=Carbon::now();
         $sanitized ['date_end']=Carbon::now();
+        $sanitized ['user_id']=  $request->getUserId();
+
 
         // Store the Task
         $task = Task::create($sanitized);
@@ -191,11 +195,14 @@ class TasksController extends Controller
     {
         $this->authorize('admin.task.edit', $task);
         $state = State::all();
+        $user = AdminUser::all();
+
 
 
         return view('admin.task.edit', [
             'task' => $task,
             'state' => $state,
+            'user' => $user,
         ]);
     }
 
@@ -211,6 +218,8 @@ class TasksController extends Controller
         // Sanitize input
         $sanitized = $request->getSanitized();
         $sanitized ['state_id']=  $request->getStateId();
+        $sanitized ['user_id']=  $request->getUserId();
+
 
         //Actualizar calculo de fecha
         $task1 = Task::find($task->id);

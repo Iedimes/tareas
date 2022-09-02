@@ -33,6 +33,8 @@ class UpdateTask extends FormRequest
             'state' => ['sometimes'],
             'advance' => ['sometimes'],
             'priority'=>['sometimes'],
+            'user' => ['sometimes'],
+
 
         ];
     }
@@ -56,4 +58,11 @@ class UpdateTask extends FormRequest
     {
         return $this->get('state')['id'];
     }
+
+    public function getUserId()
+    {
+        return $this->get('user')['id'];
+    }
+
+
 }

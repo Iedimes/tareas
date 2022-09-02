@@ -32,6 +32,8 @@ class StoreTask extends FormRequest
             'state' => [''],
             'advance' => ['', ''],
             'priority'=>['required'],
+            'user' => ['required'],
+
 
         ];
     }
@@ -53,5 +55,10 @@ class StoreTask extends FormRequest
     public function getStateId()
     {
         return $this->get('state')['id'];
+    }
+
+    public function getUserId()
+    {
+        return $this->get('user')['id'];
     }
 }

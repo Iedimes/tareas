@@ -11,6 +11,8 @@
         <task-form
             :action="'{{ url('admin/tasks') }}'"
             :state="{{$state->toJson()}}"
+            :user="{{$user->toJson()}}"
+
             v-cloak
             inline-template>
 

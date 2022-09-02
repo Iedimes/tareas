@@ -2,7 +2,7 @@ import AppForm from '../app-components/Form/AppForm';
 
 Vue.component('task-form', {
     mixins: [AppForm],
-    props:['state'],
+    props:['state','user'],
     data: function() {
         return {
             form: {
@@ -13,6 +13,7 @@ Vue.component('task-form', {
                 state:  '' ,
                 advance:  '' ,
                 priority: '',
+                user:  '' ,
 
 
 

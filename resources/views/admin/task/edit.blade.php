@@ -11,6 +11,8 @@
                 :action="'{{ $task->resource_url }}'"
                 :data="{{ $task->toJson() }}"
                 :state="{{$state->toJson()}}"
+                :user="{{$user->toJson()}}"
+
                 v-cloak
                 inline-template>
 

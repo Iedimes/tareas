@@ -19,17 +19,17 @@
 
         <div class="row">
             <div class="form-group col-sm-2">
-            <p class="card-text"><strong>TAREA:</strong>  {{ $task->name }}</p>
+            <p class="card-text"><strong>PROCESO:</strong>  {{ $task->name }}</p>
             </div>
             <div class="form-group col-sm-3">
-                <p class="card-text"><strong>FECHA INICIO:</strong> {{date("d/m/Y", strtotime($task->date_begin))}} </p>
+                <p class="card-text"><strong>FEC INI:</strong> {{date("d/m/Y", strtotime($task->date_begin))}} </p>
 
             </div>
             <div class="form-group col-sm-3">
-                <p class="card-text"><strong>FECHA FINAL:</strong> {{date("d/m/Y", strtotime($task->date_end))}}</p>
+                <p class="card-text"><strong>FEC FIN:</strong> {{date("d/m/Y", strtotime($task->date_end))}}</p>
             </div>
             <div class="form-group col-sm-4">
-                <p class="card-text"><strong>OBSERVACION:</strong> {{$task->obs}} </p>
+                <p class="card-text"><strong>DESCRIPCIÓN PROCESO:</strong> {{$task->obs}} </p>
             </div>
         </div>
         <div class="row">
@@ -76,6 +76,10 @@
 
             </div>
 
+            <div class="form-group col-sm-3">
+                <p class="card-text"><strong>RESPONSABLE PRINCIPAL:</strong> {{ $task->user->full_name}} </p>
+            </div>
+
 
         </div>
 
@@ -104,7 +108,7 @@
       <div class="col">
           <div class="card">
               <div class="card-header">
-                <i class="fa fa-align-justify"></i> DETALLE TAREA
+                <i class="fa fa-align-justify"></i> DETALLE PROCESO
                 {{-- <center><h3>DETALLE TAREA</h3></center> --}}
                     @if ($task->state_id==2)
 

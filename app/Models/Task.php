@@ -14,6 +14,7 @@ class Task extends Model
         'state_id',
         'advance',
         'priority',
+        'user_id',
 
     ];
 
@@ -27,7 +28,7 @@ class Task extends Model
     ];
 
     protected $appends = ['resource_url'];
-    protected $with = ['state'];
+    protected $with = ['state','user'];
 
 
     /* ************************ ACCESSOR ************************* */
@@ -41,5 +42,10 @@ class Task extends Model
     {
         return $this->belongsTo('App\Models\State');
 
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\AdminUser', 'user_id', 'id');
     }
 }

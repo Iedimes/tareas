@@ -58,6 +58,8 @@
                                         <th is='sortable' :column="'advance'">{{ trans('admin.task.columns.advance') }}</th>
                                         <th is='sortable' :column="'place'">{{ trans('admin.task.columns.place') }}</th>
                                         <th is='sortable' :column="'priority'">{{ trans('admin.task.columns.priority') }}</th>
+                                        <th is='sortable' :column="'user_id'">{{ trans('admin.task.columns.user_id') }}</th>
+
 
 
                                         <th></th>
@@ -115,8 +117,10 @@
 
 
                                         </td>
-                                        <td>@{{ item.place }}</td>
+                                        {{-- <td>@{{ item.place }}</td> --}}
                                         <td>@{{ item.priority }}</td>
+                                        <td>@{{ item.user.full_name }}</td>
+
 
                                         <td>
                                             <div class="row no-gutters">
