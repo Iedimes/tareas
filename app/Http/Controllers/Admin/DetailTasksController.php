@@ -34,7 +34,11 @@ class DetailTasksController extends Controller
      * @return array|Factory|View
      */
     public function index(IndexDetailTask $request)
+
+
     {
+        $login = auth()->id();
+
         // create and AdminListing instance for a specific model and
         $data = AdminListing::create(DetailTask::class)->processRequestAndGet(
             // pass the request with params
@@ -44,7 +48,13 @@ class DetailTasksController extends Controller
             ['id', 'name', 'task_id', 'state_id', 'date_begin', 'date_end', 'obs', 'user_id', 'advance', 'place'],
 
             // set columns to searchIn
-            ['id', 'name', 'obs']
+            ['id', 'name', 'obs'],
+
+            function ($query) use ($login) {
+                $query
+                    ->where('detail_tasks.user_id', '=', $login)
+                    ->orderBy('id', 'DESC');
+             }
         );
 
 
