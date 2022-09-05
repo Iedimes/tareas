@@ -89,6 +89,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::post('/bulk-destroy',                                'DetailTasksController@bulkDestroy')->name('bulk-destroy');
             Route::post('/{detailTask}',                                'DetailTasksController@update')->name('update');
             Route::delete('/{detailTask}',                              'DetailTasksController@destroy')->name('destroy');
+            Route::get('/{task}/show',                                  'DetailTasksController@show')->name('show');
         });
     });
 });

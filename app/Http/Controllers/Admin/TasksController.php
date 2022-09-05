@@ -9,7 +9,7 @@ use App\Http\Requests\Admin\Task\IndexTask;
 use App\Http\Requests\Admin\Task\StoreTask;
 use App\Http\Requests\Admin\Task\UpdateTask;
 use App\Models\Task;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\DetailTask;
 use App\Models\AdminUser;
 use App\Models\State;
@@ -37,6 +37,8 @@ class TasksController extends Controller
      */
     public function index(Task $task,IndexTask $request)
     {
+
+        $login = auth()->id();
         // create and AdminListing instance for a specific model and
         $id = $task->id;
 
@@ -48,7 +50,13 @@ class TasksController extends Controller
             ['id', 'name', 'date_begin', 'date_end', 'obs', 'state_id', 'advance', 'place','priority','user_id'],
 
             // set columns to searchIn
-            ['id', 'name', 'obs']
+            ['id', 'name', 'obs'],
+
+            function ($query) use ($login) {
+                $query
+                    ->where('tasks.user_id', '=', $login)
+                    ->orderBy('id', 'DESC');
+             }
         );
 
 
