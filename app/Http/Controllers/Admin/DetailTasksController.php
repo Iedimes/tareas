@@ -37,6 +37,7 @@ class DetailTasksController extends Controller
 
 
     {
+        //recuperar el usuario logueado y comparar con el que esta asignado al detalle de la tarea
         $login = auth()->id();
 
         // create and AdminListing instance for a specific model and
