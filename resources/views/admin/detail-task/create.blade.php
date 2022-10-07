@@ -7,15 +7,12 @@
     <div class="container-xl">
 
                 <div class="card">
-
         <detail-task-form
             :action="'{{ url('admin/detail-tasks') }}'"
             :state="{{$state->toJson()}}"
             :task="{{$task->id }}"
             :user="{{$user->toJson()}}"
             {{-- :id="{{$id}}" --}}
-
-
 
             v-cloak
             inline-template>

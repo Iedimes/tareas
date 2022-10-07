@@ -4,3 +4,6 @@ import './profile-edit-password';
 import './state';
 import './task';
 import './detail-task';
+import './rol-admin-user';
+import './role-admin-user';
+import './role';

@@ -90,9 +90,8 @@
                                         <td>@{{ item.date_end | date }}</td>
                                         <td>@{{ item.obs }}</td>
                                         <td>@{{ item.user.full_name }}</td>
-                                        <td>@{{ item.advance }}</td>
+                                        <td>@{{ item.advance }}</td >
                                         <td>@{{ item.place }}</td>
-
                                         <td>
                                             <div class="row no-gutters">
                                                 <div class="col-auto">

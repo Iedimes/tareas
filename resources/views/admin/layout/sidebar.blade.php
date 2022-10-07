@@ -2,9 +2,22 @@
     <nav class="sidebar-nav">
         <ul class="nav">
             <li class="nav-title">{{ trans('brackets/admin-ui::admin.sidebar.content') }}</li>
+
+            @if (Auth::user()->rol_app->rol_name['id'] == 2)
+
             <li class="nav-item"><a class="nav-link" href="{{ url('admin/tasks') }}"><i class="nav-icon icon-list"></i> {{ trans('admin.task.title') }}</a></li>
             {{-- <li class="nav-item"><a class="nav-link" href="{{ url('admin/states') }}"><i class="nav-icon icon-globe"></i> {{ trans('admin.state.title') }}</a></li> --}}
+
+             @else
+
+
             <li class="nav-item"><a class="nav-link" href="{{ url('admin/detail-tasks') }}"><i class="nav-icon icon-plane"></i> {{ trans('admin.detail-task.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/rol-admin-users') }}"><i class="nav-icon icon-compass"></i> {{ trans('admin.rol-admin-user.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/role-admin-users') }}"><i class="nav-icon icon-magnet"></i> {{ trans('admin.role-admin-user.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/roles') }}"><i class="nav-icon icon-flag"></i> {{ trans('admin.role.title') }}</a></li>
+
+
+           @endif
            {{-- Do not delete me :) I'm used for auto-generation menu items --}}
 
             {{-- <li class="nav-title">{{ trans('brackets/admin-ui::admin.sidebar.settings') }}</li> --}}

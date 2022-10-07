@@ -59,3 +59,36 @@ $factory->define(App\Models\DetailTask::class, static function (Faker\Generator 
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\RolAdminUser::class, static function (Faker\Generator $faker) {
+    return [
+        'user_id' => $faker->randomNumber(5),
+        'rol_id' => $faker->randomNumber(5),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\RoleAdminUser::class, static function (Faker\Generator $faker) {
+    return [
+        'admin_user_id' => $faker->randomNumber(5),
+        'role_id' => $faker->randomNumber(5),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Role::class, static function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->firstName,
+        'guard_name' => $faker->sentence,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});

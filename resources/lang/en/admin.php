@@ -90,5 +90,56 @@ return [
         ],
     ],
 
+    'rol-admin-user' => [
+        'title' => 'Rol Admin Users',
+
+        'actions' => [
+            'index' => 'Rol Admin Users',
+            'create' => 'New Rol Admin User',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'user_id' => 'User',
+            'rol_id' => 'Rol',
+            
+        ],
+    ],
+
+    'role-admin-user' => [
+        'title' => 'Role Admin Users',
+
+        'actions' => [
+            'index' => 'Role Admin Users',
+            'create' => 'New Role Admin User',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'admin_user_id' => 'Admin user',
+            'role_id' => 'Role',
+            
+        ],
+    ],
+
+    'role' => [
+        'title' => 'Roles',
+
+        'actions' => [
+            'index' => 'Roles',
+            'create' => 'New Role',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            'guard_name' => 'Guard name',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

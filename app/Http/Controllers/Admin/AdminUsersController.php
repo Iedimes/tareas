@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminUser\DestroyAdminUser;
 use App\Http\Requests\Admin\AdminUser\ImpersonalLoginAdminUser;
 use App\Http\Requests\Admin\AdminUser\IndexAdminUser;
 use App\Http\Requests\Admin\AdminUser\StoreAdminUser;
 use App\Http\Requests\Admin\AdminUser\UpdateAdminUser;
-use Brackets\AdminAuth\Models\AdminUser;
+use App\Models\AdminUser;
 use Spatie\Permission\Models\Role;
 use Brackets\AdminAuth\Activation\Facades\Activation;
 use Brackets\AdminAuth\Services\ActivationService;
@@ -24,7 +23,6 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Config;
 use Illuminate\View\View;
-
 class AdminUsersController extends Controller
 {
 
@@ -57,7 +55,6 @@ class AdminUsersController extends Controller
         $data = AdminListing::create(AdminUser::class)->processRequestAndGet(
             // pass the request with params
             $request,
-
             // set columns to query
             ['id', 'first_name', 'last_name', 'email', 'activated', 'forbidden', 'language', 'last_login_at'],
 
@@ -108,7 +105,6 @@ class AdminUsersController extends Controller
         if ($request->ajax()) {
             return ['redirect' => url('admin/admin-users'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }
-
         return redirect('admin/admin-users');
     }
 

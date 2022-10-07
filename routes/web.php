@@ -93,3 +93,49 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         });
     });
 });
+
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('rol-admin-users')->name('rol-admin-users/')->group(static function() {
+            Route::get('/',                                             'RolAdminUsersController@index')->name('index');
+            Route::get('/create',                                       'RolAdminUsersController@create')->name('create');
+            Route::post('/',                                            'RolAdminUsersController@store')->name('store');
+            Route::get('/{rolAdminUser}/edit',                          'RolAdminUsersController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'RolAdminUsersController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{rolAdminUser}',                              'RolAdminUsersController@update')->name('update');
+            Route::delete('/{rolAdminUser}',                            'RolAdminUsersController@destroy')->name('destroy');
+        });
+    });
+});
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('role-admin-users')->name('role-admin-users/')->group(static function() {
+            Route::get('/',                                             'RoleAdminUsersController@index')->name('index');
+            Route::get('/create',                                       'RoleAdminUsersController@create')->name('create');
+            Route::post('/',                                            'RoleAdminUsersController@store')->name('store');
+            Route::get('/{roleAdminUser}/edit',                         'RoleAdminUsersController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'RoleAdminUsersController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{roleAdminUser}',                             'RoleAdminUsersController@update')->name('update');
+            Route::delete('/{roleAdminUser}',                           'RoleAdminUsersController@destroy')->name('destroy');
+        });
+    });
+});
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('roles')->name('roles/')->group(static function() {
+            Route::get('/',                                             'RolesController@index')->name('index');
+            Route::get('/create',                                       'RolesController@create')->name('create');
+            Route::post('/',                                            'RolesController@store')->name('store');
+            Route::get('/{role}/edit',                                  'RolesController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'RolesController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{role}',                                      'RolesController@update')->name('update');
+            Route::delete('/{role}',                                    'RolesController@destroy')->name('destroy');
+        });
+    });
+});

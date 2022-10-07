@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -61,6 +60,21 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
      * @param Request $request
      * @throws ValidationException
      * @return array|RedirectResponse|Redirector
@@ -76,7 +90,7 @@ class ProfileController extends Controller
             'last_name' => ['nullable', 'string'],
             'email' => ['sometimes', 'email', Rule::unique('admin_users', 'email')->ignore($this->adminUser->getKey(), $this->adminUser->getKeyName())->whereNull('deleted_at'), 'string'],
             'language' => ['sometimes', 'string'],
-            
+
         ]);
 
         // Sanitize input
@@ -85,7 +99,7 @@ class ProfileController extends Controller
             'last_name',
             'email',
             'language',
-            
+
         ]);
 
         // Update changed values AdminUser
@@ -113,7 +127,6 @@ class ProfileController extends Controller
         ]);
     }
 
-
     /**
      * Update the specified resource in storage.
      *
@@ -129,13 +142,13 @@ class ProfileController extends Controller
         // Validate the request
         $this->validate($request, [
             'password' => ['sometimes', 'confirmed', 'min:7', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9]).*$/', 'string'],
-            
+
         ]);
 
         // Sanitize input
         $sanitized = $request->only([
             'password',
-            
+
         ]);
 
         //Modify input, set hashed password
