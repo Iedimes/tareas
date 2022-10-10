@@ -28,7 +28,7 @@ class StoreRoleAdminUser extends FormRequest
         return [
             'admin_user_id' => ['required', 'integer'],
             'role_id' => ['required', 'integer'],
-            
+
         ];
     }
 
@@ -44,5 +44,15 @@ class StoreRoleAdminUser extends FormRequest
         //Add your code for manipulation with request data here
 
         return $sanitized;
+    }
+
+    public function getRoleId()
+    {
+        return $this->get('role')['id'];
+    }
+
+    public function getUserId()
+    {
+        return $this->get('admin_user')['id'];
     }
 }

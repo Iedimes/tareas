@@ -28,7 +28,7 @@ class UpdateRoleAdminUser extends FormRequest
         return [
             'admin_user_id' => ['sometimes', 'integer'],
             'role_id' => ['sometimes', 'integer'],
-            
+
         ];
     }
 
@@ -46,4 +46,14 @@ class UpdateRoleAdminUser extends FormRequest
 
         return $sanitized;
     }
+
+    public function getRoleId()
+    {
+        return $this->get('role')['id'];
+    }
+
+    // public function getUserId()
+    // {
+    //     return $this->get('admin_users')['id'];
+    // }
 }

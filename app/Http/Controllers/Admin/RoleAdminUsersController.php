@@ -9,6 +9,8 @@ use App\Http\Requests\Admin\RoleAdminUser\IndexRoleAdminUser;
 use App\Http\Requests\Admin\RoleAdminUser\StoreRoleAdminUser;
 use App\Http\Requests\Admin\RoleAdminUser\UpdateRoleAdminUser;
 use App\Models\RoleAdminUser;
+use App\Models\Role;
+use App\Models\AdminUser;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -64,8 +66,10 @@ class RoleAdminUsersController extends Controller
     public function create()
     {
         $this->authorize('admin.role-admin-user.create');
+        $user=AdminUser::all();
+        $role=Role::all();
 
-        return view('admin.role-admin-user.create');
+        return view('admin.role-admin-user.create', compact('role', 'user'));
     }
 
     /**
@@ -78,6 +82,9 @@ class RoleAdminUsersController extends Controller
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
+        $sanitized ['role_id']=  $request->getRoleId();
+        $sanitized ['admin_user_id']=  $request->getUserId();
+
 
         // Store the RoleAdminUser
         $roleAdminUser = RoleAdminUser::create($sanitized);
@@ -114,9 +121,29 @@ class RoleAdminUsersController extends Controller
     {
         $this->authorize('admin.role-admin-user.edit', $roleAdminUser);
 
+        //return $roleAdminUser->admin_user_id;
+        $id = $roleAdminUser->admin_user_id;
+
+
+        $user=AdminUser::where('id', '=', $id)
+                         ->first();
+
+        $cod = $roleAdminUser->role_id;
+        $roleA=Role::where('id', '=', $cod)
+                    ->select('name')
+                    ->first();
+
+        // $role=Role::all();
+        $role=Role::where('id', '<>', $cod)
+                    ->get();
+
 
         return view('admin.role-admin-user.edit', [
             'roleAdminUser' => $roleAdminUser,
+            'role' => $role,
+            'roleA' => $roleA,
+            'user' => $user,
+
         ]);
     }
 
@@ -131,6 +158,8 @@ class RoleAdminUsersController extends Controller
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
+        $sanitized ['role_id']=  $request->getRoleId();
+        $sanitized ['admin_user_id']=  $request->admin_user_id;
 
         // Update changed values RoleAdminUser
         $roleAdminUser->update($sanitized);

@@ -7,29 +7,31 @@
     <div class="container-xl">
 
                 <div class="card">
-        
+
         <role-admin-user-form
             :action="'{{ url('admin/role-admin-users') }}'"
+            :role="{{$role->toJson()}}"
+            :user="{{$user->toJson()}}"
             v-cloak
             inline-template>
 
             <form class="form-horizontal form-create" method="post" @submit.prevent="onSubmit" :action="action" novalidate>
-                
+
                 <div class="card-header">
                     <i class="fa fa-plus"></i> {{ trans('admin.role-admin-user.actions.create') }}
                 </div>
 
                 <div class="card-body">
-                    @include('admin.role-admin-user.components.form-elements')
+                    @include('admin.role-admin-user.components.form-elementsC')
                 </div>
-                                
+
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary" :disabled="submiting">
                         <i class="fa" :class="submiting ? 'fa-spinner' : 'fa-download'"></i>
                         {{ trans('brackets/admin-ui::admin.btn.save') }}
                     </button>
                 </div>
-                
+
             </form>
 
         </role-admin-user-form>
@@ -38,5 +40,5 @@
 
         </div>
 
-    
+
 @endsection

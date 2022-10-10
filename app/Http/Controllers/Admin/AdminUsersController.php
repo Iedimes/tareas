@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminUser\DestroyAdminUser;
 use App\Http\Requests\Admin\AdminUser\ImpersonalLoginAdminUser;
@@ -23,6 +24,8 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Config;
 use Illuminate\View\View;
+use App\Models\RoleAdminUser;
+
 class AdminUsersController extends Controller
 {
 
