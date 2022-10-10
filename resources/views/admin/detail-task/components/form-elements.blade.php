@@ -16,7 +16,6 @@
             :multiple="false"
             track-by="id"
             label="name"
-            :preselect-first="true"
             :taggable="true"
             tag-placeholder=""
             placeholder="{{ trans('admin.task.columns.state_id') }}">

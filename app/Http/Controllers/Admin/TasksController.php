@@ -37,8 +37,30 @@ class TasksController extends Controller
      */
     public function index(Task $task,IndexTask $request)
     {
+        //return Auth::user()->id;
+        if (Auth::user()->rol_app->rol_name['id'] == 1){
+            //$login = auth()->id();
+        // create and AdminListing instance for a specific model and
+        $id = $task->id;
 
-        $login = auth()->id();
+        $data = AdminListing::create(Task::class)->processRequestAndGet(
+            // pass the request with params
+            $request,
+
+            // set columns to query
+            ['id', 'name', 'date_begin', 'date_end', 'obs', 'state_id', 'advance', 'place','priority','user_id'],
+
+            // set columns to searchIn
+            ['id', 'name', 'obs'],
+
+            // function ($query) use ($login) {
+            //     $query
+            //         ->where('tasks.user_id', '=', $login)
+            //         ->orderBy('id', 'DESC');
+            //  }
+        );
+        }elseif(Auth::user()->rol_app->rol_name['id'] == 2){
+        $login = Auth::user()->id;
         // create and AdminListing instance for a specific model and
         $id = $task->id;
 
@@ -57,8 +79,9 @@ class TasksController extends Controller
                     ->where('tasks.user_id', '=', $login)
                     ->orderBy('id', 'DESC');
              }
-        );
 
+        );
+        }
 
         if ($request->ajax()) {
             if ($request->has('bulk')) {
