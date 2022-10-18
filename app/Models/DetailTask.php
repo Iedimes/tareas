@@ -28,7 +28,7 @@ class DetailTask extends Model
     ];
 
     protected $appends = ['resource_url'];
-    protected $with = ['state','user', 'task'];
+    protected $with = ['state','users', 'task', 'roldetalle'];
 
 
 
@@ -50,8 +50,13 @@ class DetailTask extends Model
 
     }
 
-    public function user()
+    public function users()
     {
         return $this->belongsTo('App\Models\AdminUser', 'user_id', 'id');
+    }
+
+    public function roldetalle()
+    {
+        return $this->belongsTo('App\Models\RoleAdminUser', 'user_id', 'admin_user_id');
     }
 }

@@ -102,6 +102,8 @@
   <detail-task-listing
   :data="{{ $data->toJson() }}"
   :url="'{{ url('admin/detail-tasks') }}'"
+  :role= "{{Auth::user()->rol_app->rol_name['id']}}"
+  :logueado= "{{Auth::user()->id}}"
   inline-template>
 
   <div class="row">
@@ -109,8 +111,9 @@
           <div class="card">
               <div class="card-header">
                 <i class="fa fa-align-justify"></i> DETALLE PROCESO
+                {{-- Id Rol: {{Auth::user()->rol_app->rol_name['id']}} -- Rolname: {{Auth::user()->rol_app->rol_name['name']}} ---Id usuario.{{Auth::user()->id}} --}}
                 {{-- <center><h3>DETALLE TAREA</h3></center> --}}
-                    @if ($task->state_id==2)
+                    @if ($task->state_id==2 or Auth::user()->rol_app->rol_name['id']==3)
 
                     @else
 
@@ -177,6 +180,8 @@
                               </tr>
                           </thead>
                           <tbody>
+
+
                               <tr v-for="(item, index) in collection" :key="item.id" :class="bulkItems[item.id] ? 'bg-bulk' : ''">
                                   {{-- <td class="bulk-checkbox">
                                       <input class="form-check-input" :id="'enabled' + item.id" type="checkbox" v-model="bulkItems[item.id]" v-validate="''" :data-vv-name="'enabled' + item.id"  :name="'enabled' + item.id + '_fake_element'" @click="onBulkItemClicked(item.id)" :disabled="bulkCheckingAllLoader">
@@ -191,33 +196,61 @@
                                   <td>@{{ item.date_begin | date }}</td>
                                   <td>@{{ item.date_end | date }}</td>
                                   <td>@{{ item.obs }}</td>
-                                  <td>@{{ item.user.full_name }}</td>
-                                  {{-- <td>@{{ item.advance }} %</td>
-                                  <td>@{{ item.place }}</td> --}}
+                                  <td>@{{ item.users.full_name }}</td>
+                                  {{-- <td>@{{ item.roldetalle.role_id }} %</td>
+                                  <td>@{{ logueado }}</td> --}}
 
                                   <td>
-                                      <div class="row no-gutters">
-                                          <div class="col-auto" v-if="item.state.name=='FINALIZADO'">
+                                    <div class="row no-gutters">
 
 
-                                          </div>
 
-                                          <div class="col-auto" v-else>
-                                              <a class="btn btn-sm btn-spinner btn-info" :href="item.resource_url + '/edit'" title="{{ trans('brackets/admin-ui::admin.btn.edit') }}" role="button"><i class="fa fa-edit"></i></a>
-                                          </div>
 
-                                          <form class="col" @submit.prevent="deleteItem(item.resource_url)" v-if="item.state.name=='FINALIZADO'">
+                                        <div class="col-auto" v-if="role==3 && item.roldetalle.role_id==3 && item.users.id==logueado && item.state.name!='FINALIZADO'">
 
-                                          </form>
 
-                                          <form class="col" @submit.prevent="deleteItem(item.resource_url)" v-else>
+
+                                            <a class="btn btn-sm btn-spinner btn-info" :href="item.resource_url + '/edit'" title="{{ trans('brackets/admin-ui::admin.btn.edit') }}" role="button"><i class="fa fa-edit"></i></a>
+                                        </div>
+
+
+                                        <div class="col-auto" v-if="role!=3 && item.state.name!='FINALIZADO'">
+
+
+
+                                            <a class="btn btn-sm btn-spinner btn-info" :href="item.resource_url + '/edit'" title="{{ trans('brackets/admin-ui::admin.btn.edit') }}" role="button"><i class="fa fa-edit"></i></a>
+
+                                        </div>
+
+                                        <form class="col" @submit.prevent="deleteItem(item.resource_url)" v-if="role!=3 && item.state.name!='FINALIZADO'">
                                             <button type="submit" class="btn btn-sm btn-danger" title="{{ trans('brackets/admin-ui::admin.btn.delete') }}"><i class="fa fa-trash-o"></i></button>
                                         </form>
-                                      </div>
-                                  </td>
-                              </tr>
-                          </tbody>
-                      </table>
+
+
+
+
+
+
+
+
+
+
+
+                                        <form class="col" @submit.prevent="deleteItem(item.resource_url)" v-if="item.state.name=='FINALIZADO'">
+
+                                        </form>
+
+                                        {{-- <form class="col" @submit.prevent="deleteItem(item.resource_url)" v-else>
+                                          <button type="submit" class="btn btn-sm btn-danger" title="{{ trans('brackets/admin-ui::admin.btn.delete') }}"><i class="fa fa-trash-o"></i></button>
+                                        </form> --}}
+
+
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
                       <div class="row" v-if="pagination.state.total > 0">
                           <div class="col-sm">
