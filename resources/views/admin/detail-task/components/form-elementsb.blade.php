@@ -7,7 +7,7 @@
 </div>
 
 
-{{-- <div class="form-group row align-items-center" :class="{'has-danger': errors.has('state_id'), 'has-success': fields.state_id && fields.state_id.valid }">
+<div class="form-group row align-items-center" :class="{'has-danger': errors.has('state_id'), 'has-success': fields.state_id && fields.state_id.valid }">
     <label for="state_id" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.task.columns.state_id') }}</label>
         <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
             <multiselect
@@ -22,7 +22,7 @@
         </multiselect>
         <div v-if="errors.has('state_id')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('state_id') }}</div>
     </div>
-</div> --}}
+</div>
 
 <div class="form-group row align-items-center" :class="{'has-danger': errors.has('date_begin'), 'has-success': fields.date_begin && fields.date_begin.valid }">
     <label for="date_begin" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.detail-task.columns.date_begin') }}</label>
@@ -54,10 +54,11 @@
     </div>
 </div>
 
-<div class="form-group row align-items-center" :class="{'has-danger': errors.has('user_id'), 'has-success': fields.user_id && fields.user_id.valid }">
+{{-- <div class="form-group row align-items-center" :class="{'has-danger': errors.has('user_id'), 'has-success': fields.user_id && fields.user_id.valid }">
     <label for="user_id" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.detail-task.columns.user_id') }}</label>
-        <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
-       <multiselect
+        <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'"> --}}
+        {{-- <input type="text" v-model="form.user_id" v-validate="'required|integer'" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('user_id'), 'form-control-success': fields.user_id && fields.user_id.valid}" id="user_id" name="user_id" placeholder="{{ trans('admin.detail-help.columns.user_id') }}"> --}}
+        {{-- <multiselect
         v-model="form.user"
         :options="user"
         :multiple="false"
@@ -69,8 +70,7 @@
     </multiselect>
         <div v-if="errors.has('user_id')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('user_id') }}</div>
     </div>
-</div>
-
+</div> --}}
 {{--
 <div class="form-group row align-items-center" :class="{'has-danger': errors.has('advance'), 'has-success': fields.advance && fields.advance.valid }">
     <label for="advance" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.detail-task.columns.advance') }}</label>
