@@ -26,8 +26,8 @@ class StoreRoleAdminUser extends FormRequest
     public function rules(): array
     {
         return [
-            'admin_user_id' => ['required', 'integer'],
-            'role_id' => ['required', 'integer'],
+            'admin_user' => [ ''],
+            'role' => [''],
 
         ];
     }

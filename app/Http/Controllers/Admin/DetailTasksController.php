@@ -215,10 +215,12 @@ class DetailTasksController extends Controller
     public function update(UpdateDetailTask $request, DetailTask $detailTask)
     {
         // Sanitize input
-        $sanitized = $request->getSanitized();
+        //
+       //  return $request->users['id'];
+      $sanitized = $request->getSanitized();
         $sanitized ['state_id']=  $request->getStateId();
         $sanitized ['task_id']=  $request->getTaskId();
-        $sanitized ['user_id']=  $request->getUserId();
+       $sanitized ['user_id']=  $request->users['id'];// $request->getUserId();
 
         //Actualizar fecha del detalle
         //$detailTask->id;
